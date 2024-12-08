@@ -1,0 +1,20 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.login,
+.image {
+  min-height: 100vh;
+ 
+}
+
+.bg-image {
+  background-size: 650px auto;
+  background-image: url('logokemenkumham.png');
+  background-repeat: no-repeat;
+ 
+  background-position: center center;
+}

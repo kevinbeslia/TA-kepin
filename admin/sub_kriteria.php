@@ -1,6 +1,7 @@
 <?php
 include("proses/style/header.php");
 include("proses/style/sidebar.php");
+$id_periode = $_GET['idp'];
 ?>
 
 <div class="container-fluid">
@@ -41,7 +42,7 @@ include("proses/style/sidebar.php");
               </div>';
           } else {
             // Jika belum ada, lanjutkan dengan penyimpanan
-            $save = mysqli_query($konek, "INSERT INTO tbl_subkriteria VALUES ('', '$id_kriteria', '$ket', '$nbobot')");
+            $save = mysqli_query($konek, "INSERT INTO tbl_subkriteria (id_kriteria, ket, nbobot) VALUES ($id_kriteria, '$ket', $nbobot)");
 
             if ($save) {
               echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -144,7 +145,7 @@ include("proses/style/sidebar.php");
         // Menghitung offset untuk query database
         $offset = ($currentPage - 1) * $itemsPerPage;
 
-        $sql = mysqli_query($konek, "SELECT * FROM tbl_subkriteria a LEFT JOIN tbl_kriteria b ON a.id_kriteria = b.id_kriteria ORDER BY a.id_kriteria ASC, nbobot DESC LIMIT $offset, $itemsPerPage");
+        $sql = mysqli_query($konek, "SELECT * FROM tbl_subkriteria a LEFT JOIN tbl_kriteria b ON a.id_kriteria = b.id_kriteria WHERE b.id_periode = $id_periode ORDER BY a.id_kriteria ASC, nbobot DESC LIMIT $offset, $itemsPerPage");
         $no = $offset + 1;
         ?>
         <button class="btn btn-sm btn-success mb-3" data-toggle="modal" data-target="#tambah_bank"><i class="fas fa-plus fa-sm"></i> Tambah Sub Kriteria</button>
@@ -171,11 +172,11 @@ include("proses/style/sidebar.php");
                       <td><?php echo $array['ket']; ?></td>
                       <td align="center"><?php echo $array['nbobot']; ?></td>
                       <td align="center">
-                        <a href="edit_subkriteria.php?id=<?php echo $array['id_subkriteria']; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
+                        <a href="edit_subkriteria.php?idp=<?= $id_periode ?>&id=<?php echo $array['id_subkriteria']; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
                       </td>
 
                       <td align="center">
-                        <a href="hapus_subkriteria.php?id=<?php echo $array['id_subkriteria']; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-danger btn-sm" onclick="return confirm('Apakah Data Sub Kriteria ini akan dihapus?')"><span class="fas fa-trash"></span></i></a>
+                        <a href="hapus_subkriteria.php?idp=<?= $id_periode ?>&id=<?php echo $array['id_subkriteria']; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-danger btn-sm" onclick="return confirm('Apakah Data Sub Kriteria ini akan dihapus?')"><span class="fas fa-trash"></span></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -189,7 +190,7 @@ include("proses/style/sidebar.php");
                   <?php
                   for ($page = 1; $page <= $totalPages; $page++) {
                     echo '<li class="page-item ' . ($page === $currentPage ? 'active' : '') . '">
-            <a class="page-link" href="?page=' . $page . '">' . $page . '</a>
+            <a class="page-link" href="?idp=' . $id_periode . '&page=' . $page . '">' . $page . '</a>
           </li>';
                   }
                   ?>
@@ -226,7 +227,7 @@ include("proses/style/sidebar.php");
               <option value="" disabled selected>--Pilih Kriteria--</option>
               <?php
               include("../config/koneksi.php");
-              $sqlkriteria = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+              $sqlkriteria = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $id_periode");
               while ($row = mysqli_fetch_array($sqlkriteria)) {
               ?>
                 <option value="<?php echo $row['id_kriteria'] ?>"><?php echo $row['nama_kriteria']; ?></option>

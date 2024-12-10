@@ -137,9 +137,9 @@ if (isset($_POST['tambah'])) {
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $array['nama_kriteria']; ?></td>
                   <td><?php echo $array['jenis_kriteria']; ?></td>
-                  <td><?php echo $array['bobot']; ?></td>
+                  <td><?php echo $array['bobot'] . '/' . $totalBobot; ?></td>
                   <td>
-                    <a href="edit_kriteria.php?id=<?php echo $array['id_kriteria']; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
+                    <a href="edit_kriteria.php?idp=<?= $id_periode ?>&id=<?php echo $array['id_kriteria']; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
                   </td>
                   <td align="center">
                     <a href="hapus_kriteria.php?id=<?php echo $array['id_kriteria']; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-danger btn-sm" onclick="return confirm('Apakah Data Kriteria ini akan dihapus?')"><span class="fas fa-trash"></span></i></a>

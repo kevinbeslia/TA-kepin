@@ -1,6 +1,7 @@
 <?php
 include("proses/style/header.php");
 include("proses/style/sidebar.php");
+$id_periode = $_GET['idp'];
 ?>
 
 <div class="container-fluid">
@@ -181,7 +182,7 @@ include("proses/style/sidebar.php");
                   <?php
                   for ($page = 1; $page <= $totalPages; $page++) {
                     echo '<li class="page-item ' . ($page === $currentPage ? 'active' : '') . '">
-            <a class="page-link" href="?page=' . $page . '">' . $page . '</a>
+            <a class="page-link" href="?idp=' . $id_periode . '&page=' . $page . '">' . $page . '</a>
           </li>';
                   }
                   ?>

@@ -3,6 +3,7 @@ include("style/header.php");
 include("style/sidebarawal.php");
 include("../config/koneksi.php");
 $idk = $_GET['id'];
+$id_periode = $_GET['idp'];
 ?>
 <div class="container-fluid">
 	<div class="col-lg-12">
@@ -55,7 +56,7 @@ if (isset($_POST['edit'])) {
 	$bobot = $_POST['bobot'];
 
 	// Mendapatkan total bobot dari semua kriteria, kecuali kriteria yang sedang di-edit
-	$totalBobotQuery = mysqli_query($konek, "SELECT SUM(bobot) as total_bobot FROM tbl_kriteria WHERE id_kriteria <> '$idk'");
+	$totalBobotQuery = mysqli_query($konek, "SELECT SUM(bobot) as total_bobot FROM tbl_kriteria WHERE id_kriteria <> '$idk' AND id_periode = $id_periode");
 	$totalBobotResult = mysqli_fetch_assoc($totalBobotQuery);
 	$totalBobot = $totalBobotResult['total_bobot'] + $bobot;
 

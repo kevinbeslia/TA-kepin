@@ -1,7 +1,7 @@
 <?php
-include("proses/style/header.php");
-include("proses/style/sidebar.php");
-// $idp = $_GET['idp'];
+include("proses/style/header_kriteria.php");
+include("proses/style/sidebar_kriteria.php");
+$idp = $_GET['idp'];
 ?>
 <div class="container-fluid">
 	<div class="col-lg-12">
@@ -60,7 +60,7 @@ include("proses/style/sidebar.php");
 						include("../config/koneksi.php");
 						$id_periode = $_GET['idp'];
 						$no = 1;
-						$sql = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+						$sql = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
 						$totalBobot = 0;
 
 						while ($array = mysqli_fetch_assoc($sql)) {

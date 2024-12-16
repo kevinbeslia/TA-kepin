@@ -2,7 +2,7 @@
 include("../../config/koneksi.php");
 $id_alternatif = $_GET['id'];
 $idp = $_GET['idp'];
-$sql = mysqli_query($konek,"SELECT * FROM tbl_periode WHERE id_periode = '$idp'");
+$sql = mysqli_query($konek, "SELECT * FROM tbl_periode WHERE id_periode = '$idp'");
 $row = mysqli_fetch_array($sql);
 ?>
 <!DOCTYPE html>
@@ -25,122 +25,123 @@ $row = mysqli_fetch_array($sql);
 			<hr>
 	</center>
 	<div class="container-fluid">
-<hr>
+		<hr>
 		<?php
 		$alt = mysqli_query($konek, "SELECT * FROM  tbl_alternatif WHERE id_alternatif = '$id_alternatif'");
 		$halt = mysqli_fetch_array($alt);
 		?>
 		<p style="font-size:24px;padding:0px;margin-bottom:0px; color: #000000; font-weight: bold;">Data Narapidana</p>
 		<table>
-  			<tbody style="font-size: 18px">
-  				<tr >
-      				<th width="160px">No Registrasi Instansi</th>
-      				<td width="20px">:</td>
-      				<td><?php echo $halt['id_alternatif']; ?></td>
-    			</tr>
-    			<tr >
-      				<th width="160px">Nama</th>
-      				<td width="20px">:</td>
-      				<td><?php echo $halt['nama']; ?></td>
-    			</tr>
-    			
-    			<tr>
-      				<th width="150px">Jenis Kelamin</th>
-      				<td width="20px">:</td>
-      				<td><?php echo $halt['jenis_kelamin']; ?></td>
-    			</tr>
-    			<tr>
-      				<th width="150px">Jenis Kejahatan</th>
-      				<td width="20px">:</td>
-      				<td><?php echo $halt['jenis_kejahatan']; ?></td>
-    			</tr>
-    			<tr>
-      				<th width="150px">Tanggal Mulai Ditahan</th>
-      				<td width="20px">:</td>
-      				<td><?php $tanggal_mulai_ditahan = new DateTime( $halt['tanggal_mulai_ditahan']);
-                            echo $tanggal_mulai_ditahan->format('d-m-Y '); ?></td>
-    			</tr>
-    			<tr>
-      				<th width="150px">Periode</th>
-      				<td width="20px">:</td>
-      				<td><?php echo $row['keterangan']; ?></td>
-    			</tr>
-  			</tbody>
+			<tbody style="font-size: 18px">
+				<tr>
+					<th width="160px">No Registrasi Instansi</th>
+					<td width="20px">:</td>
+					<td><?php echo $halt['id_alternatif']; ?></td>
+				</tr>
+				<tr>
+					<th width="160px">Nama</th>
+					<td width="20px">:</td>
+					<td><?php echo $halt['nama']; ?></td>
+				</tr>
+
+				<tr>
+					<th width="150px">Jenis Kelamin</th>
+					<td width="20px">:</td>
+					<td><?php echo $halt['jenis_kelamin']; ?></td>
+				</tr>
+				<tr>
+					<th width="150px">Jenis Kejahatan</th>
+					<td width="20px">:</td>
+					<td><?php echo $halt['jenis_kejahatan']; ?></td>
+				</tr>
+				<tr>
+					<th width="150px">Tanggal Mulai Ditahan</th>
+					<td width="20px">:</td>
+					<td><?php $tanggal_mulai_ditahan = new DateTime($halt['tanggal_mulai_ditahan']);
+						echo $tanggal_mulai_ditahan->format('d-m-Y '); ?></td>
+				</tr>
+				<tr>
+					<th width="150px">Periode</th>
+					<td width="20px">:</td>
+					<td><?php echo $row['keterangan']; ?></td>
+				</tr>
+			</tbody>
 		</table>
-	
+
 		<hr>
 		<p style="font-size:20px;padding:0px;margin-bottom:10px; color: #000000; font-weight: bold; ">Hasil Analisa Kelayakan Narapidana</p>
 
 		<?php
 		$no = 1;
 		$q = mysqli_query($konek, "SELECT * FROM  tbl_hasil a LEFT JOIN tbl_alternatif b on a.id_alternatif = b.id_alternatif WHERE a.id_periode = '$idp' ORDER BY a.hasil DESC");
-		?>					
+		?>
 		<table width="50%" style="text-align: left; border-collapse: collapse; " border="1" class="table table-bordered">
 			<tr>
 				<thead>
-						<tr style="background-color: #529dff; color: #000000; border: 2px ;border-color: green" align="center">
-							<th colspan="5" style="border: 1px solid black;">Kriteria</th>
-							<th rowspan="2" style="vertical-align: middle; border: 1px solid black;">Hasil Nilai Preferensi </th>
-							<th rowspan="2" style="vertical-align: middle; border: 1px solid black;">Rekomendasi Kelayakan </th>
-						</tr>
-						<tr style="background-color: #529dff; color: #000000" align="center"><?php
-							$sqlth = $konek->query("SELECT * FROM tbl_kriteria");
-							while ($rowth = $sqlth->fetch_array()) {
-							?>
-								<th style="vertical-align: middle; border: 1px solid black;"><?= $rowth['nama_kriteria']; ?></th>
-							<?php
-							}
-							?></tr>
-					</thead>
+					<tr style="background-color: #529dff; color: #000000; border: 2px ;border-color: green" align="center">
+						<th colspan="5" style="border: 1px solid black;">Kriteria</th>
+						<th rowspan="2" style="vertical-align: middle; border: 1px solid black;">Hasil Nilai Preferensi </th>
+						<th rowspan="2" style="vertical-align: middle; border: 1px solid black;">Rekomendasi Kelayakan </th>
+					</tr>
+					<tr style="background-color: #529dff; color: #000000" align="center"><?php
+																							$sqlth = $konek->query("SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
+																							while ($rowth = $sqlth->fetch_array()) {
+																							?>
+							<th style="vertical-align: middle; border: 1px solid black;"><?= $rowth['nama_kriteria']; ?></th>
+						<?php
+																							}
+						?>
+					</tr>
+				</thead>
 			</tr>
 			<?php
-					$sql = mysqli_query($konek, "SELECT * FROM tbl_hasil a JOIN tbl_alternatif b ON a.id_alternatif = b.id_alternatif WHERE a.id_alternatif = '$id_alternatif' GROUP BY a.id_alternatif ");
-					while ($data = mysqli_fetch_assoc($sql)) {
-						$idalt = $data['id_alternatif'];
-						$nmalt = $data['nama'];
-						$hasil = $data['hasil'];
-					?>
-						<tbody>
-							<tr align="center" >
-								<?php
-								$query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_alternatif = '$id_alternatif' AND a.id_periode = '$idp'");
-								while ($rowq2 = $query2->fetch_array()) {
-								?>
-									<td style="vertical-align: middle; border: 1px solid black;"><?= $rowq2['ket']; ?>
-									</td>
+			$sql = mysqli_query($konek, "SELECT * FROM tbl_hasil a JOIN tbl_alternatif b ON a.id_alternatif = b.id_alternatif WHERE a.id_alternatif = '$id_alternatif' GROUP BY a.id_alternatif ");
+			while ($data = mysqli_fetch_assoc($sql)) {
+				$idalt = $data['id_alternatif'];
+				$nmalt = $data['nama'];
+				$hasil = $data['hasil'];
+			?>
+				<tbody>
+					<tr align="center">
+						<?php
+						$query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_alternatif = '$id_alternatif' AND a.id_periode = '$idp'");
+						while ($rowq2 = $query2->fetch_array()) {
+						?>
+							<td style="vertical-align: middle; border: 1px solid black;"><?= $rowq2['ket']; ?>
+							</td>
 
-								<?php
-								}
-								?>
-								<th style="vertical-align: middle; border: 1px solid black;" rowspan="2"><?= $hasil; ?></th>
-								<th style="vertical-align: middle; border: 1px solid black;" rowspan="2">
-								<?php
-										$range = $hasil;
-										if ($range > 0.70) {
-											echo "<font color='green'>Rekomendasi</font>";
-										} else {
-											echo "<font color='red'>Tidak Rekomendasi</font>";
-										}
-										?>
-								</th>
-							</tr>
-							<tr align="center">
-								<?php
-								$query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_alternatif = '$id_alternatif' AND a.id_periode = '$idp'");
-								while ($rowq2 = $query2->fetch_array()) {
-								?>
-									<td style="vertical-align: middle; border: 1px solid black;"><?= $rowq2['nbobot']; ?>
-									</td>
+						<?php
+						}
+						?>
+						<th style="vertical-align: middle; border: 1px solid black;" rowspan="2"><?= $hasil; ?></th>
+						<th style="vertical-align: middle; border: 1px solid black;" rowspan="2">
+							<?php
+							$range = $hasil;
+							if ($range > 0.70) {
+								echo "<font color='green'>Rekomendasi</font>";
+							} else {
+								echo "<font color='red'>Tidak Rekomendasi</font>";
+							}
+							?>
+						</th>
+					</tr>
+					<tr align="center">
+						<?php
+						$query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_alternatif = '$id_alternatif' AND a.id_periode = '$idp'");
+						while ($rowq2 = $query2->fetch_array()) {
+						?>
+							<td style="vertical-align: middle; border: 1px solid black;"><?= $rowq2['nbobot']; ?>
+							</td>
 
-								<?php
-								}
-								?>
-							</tr>
-						</tbody>
-					<?php
-						
-					}
-					?>
+						<?php
+						}
+						?>
+					</tr>
+				</tbody>
+			<?php
+
+			}
+			?>
 		</table>
 		<hr>
 	</div>
@@ -158,7 +159,9 @@ $row = mysqli_fetch_array($sql);
 			<tr>
 				<td align="center">Kepala Divisi Permasyarakatan</td>
 			</tr>
-			<tr><td height="80%"></td></tr>
+			<tr>
+				<td height="80%"></td>
+			</tr>
 			<tr>
 				<td align="center"><br><br><br></td>
 			</tr>
@@ -170,7 +173,7 @@ $row = mysqli_fetch_array($sql);
 			</tr>
 
 		</table>
-		
+
 	</div>
 	</center>
 

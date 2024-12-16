@@ -31,7 +31,7 @@ if ($_SESSION['level'] == "") {
       <!-- Divider -->
       <hr class="sidebar-divider">
       <li class="nav-item active">
-        <a class="nav-link" href="/admin/proses/index.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../../admin/proses/index.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -42,16 +42,41 @@ if ($_SESSION['level'] == "") {
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="/admin/data_kriteria.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../../admin/data_kriteria.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Kriteria</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/admin/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../../admin/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Alternatif</span>
         </a>
+        <a class="nav-link" href="../../admin/proses/data_penilaian.php?idp=<?php echo $idp; ?>">
+          <i class="fas fa-fw fa-database" style="color: #ffff"></i>
+          <span style="color: #ffff">Penilaian</span></a>
+
+        <a class="nav-link" href="../../admin/proses/hasil_keputusan.php?idp=<?php echo $idp; ?>">
+          <i class="fas fa-fw fa-database" style="color: #ffff"></i>
+          <span style="color: #ffff">Hasil Keputusan</span></a>
+      </li>
+
+      <div class="sidebar-heading" style="color: #ffff">
+        Laporan
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-report"></i>
+          <span style="color: #ffff">Laporan</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!--                   <a class="collapse-item" href="cetak_alt.php?idp=<?php echo $idp; ?>" target="_BLANK" style="color: #ffff">Data Alternatif</a>
+                  <a class="collapse-item" href="cetak_nilai.php?idp=<?php echo $idp; ?>" target="_BLANK" style="color: #ffff">Hasil Penilaian</a> -->
+            <a class="collapse-item" href="cetak_hasil.php?idp=<?php echo $idp; ?>" target="_BLANK" style="color: #000000">Hasil Keputusan</a>
+          </div>
+        </div>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -80,12 +105,12 @@ if ($_SESSION['level'] == "") {
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-              <a class="nav-link" href="/admin/periodekeputusan.php">
+              <a class="nav-link" href="../../admin/periodekeputusan.php">
                 <i class="fas fa-chevron-circle-left" style="color:#0510a8"></i>
                 <span style="color:#0510a8">Home</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/admin/logout.php">
+              <a class="nav-link" href="../../admin/logout.php">
                 <i class="fas fa-fw fa-sign-out-alt" style="color:#0510a8"></i>
                 <span style="color: #0510a8">Logout</span></a>
             </li>

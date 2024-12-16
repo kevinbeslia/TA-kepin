@@ -1,6 +1,6 @@
 <?php
-include("proses/style/header.php");
-include("proses/style/sidebar.php");
+include("proses/style/header_kriteria.php");
+include("proses/style/sidebar_kriteria.php");
 // $idp = $_GET['idp'];
 ?>
 <div class="container-fluid">

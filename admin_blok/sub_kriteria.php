@@ -1,6 +1,6 @@
 <?php
-include("proses/style/header.php");
-include("proses/style/sidebar.php");
+include("proses/style/header_kriteria.php");
+include("proses/style/sidebar_kriteria.php");
 $id_periode = $_GET['idp'];
 ?>
 
@@ -134,7 +134,7 @@ $id_periode = $_GET['idp'];
         $itemsPerPage = 8;
 
         // Menghitung jumlah total data sub kriteria
-        $totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_subkriteria"));
+        $totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_subkriteria, tbl_kriteria WHERE tbl_subkriteria.id_kriteria = tbl_kriteria.id_kriteria AND tbl_kriteria.id_periode = $id_periode"));
 
         // Menghitung jumlah total halaman
         $totalPages = ceil($totalData / $itemsPerPage);
@@ -145,7 +145,7 @@ $id_periode = $_GET['idp'];
         // Menghitung offset untuk query database
         $offset = ($currentPage - 1) * $itemsPerPage;
 
-        $sql = mysqli_query($konek, "SELECT * FROM tbl_subkriteria a LEFT JOIN tbl_kriteria b ON a.id_kriteria = b.id_kriteria ORDER BY a.id_kriteria ASC, nbobot DESC LIMIT $offset, $itemsPerPage");
+        $sql = mysqli_query($konek, "SELECT * FROM tbl_subkriteria a LEFT JOIN tbl_kriteria b ON a.id_kriteria = b.id_kriteria WHERE b.id_periode = $id_periode ORDER BY a.id_kriteria ASC, nbobot DESC LIMIT $offset, $itemsPerPage");
         $no = $offset + 1;
         ?>
 

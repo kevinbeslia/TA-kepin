@@ -1,7 +1,7 @@
 <?php
 include("../../config/koneksi.php");
 $idp = $_GET['idp'];
-$sql = mysqli_query($konek,"SELECT * FROM tbl_periode WHERE id_periode = '$idp'");
+$sql = mysqli_query($konek, "SELECT * FROM tbl_periode WHERE id_periode = '$idp'");
 $row = mysqli_fetch_array($sql);
 ?>
 <!DOCTYPE html>
@@ -30,8 +30,8 @@ $row = mysqli_fetch_array($sql);
 	<div class="container-fluid">
 
 		<p style="font-size:25px;padding:0px;margin-bottom:0px; color: #000000; font-weight: bold;" align="center">Data Hasil Keputusan <?php echo $row['keterangan']; ?></p>
-					<hr>
-					
+		<hr>
+
 		<table width="50%" style="text-align: left; border-collapse: collapse; " border="1" class="table table-bordered">
 			<tr>
 				<thead align="center" style="font-weight: bold; color: black; background-color: #529dff ">
@@ -56,36 +56,38 @@ $row = mysqli_fetch_array($sql);
 					<td style="vertical-align: middle; border: 1px solid black;"><?php echo $no; ?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php echo $row['id_alternatif']; ?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php echo $row['nama']; ?></td>
-					<td style="vertical-align: middle; border: 1px solid black;"><?php 
-			                            $tanggal_lahir = new DateTime( $row['tanggal_lahir']);
-			                            echo $tanggal_lahir->format('d-m-Y '); // Output: 2024-07-16 12:34:56
-			                            ?></td>
+					<td style="vertical-align: middle; border: 1px solid black;"><?php
+																					$tanggal_lahir = new DateTime($row['tanggal_lahir']);
+																					echo $tanggal_lahir->format('d-m-Y '); // Output: 2024-07-16 12:34:56
+																					?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php echo $row['jenis_kelamin']; ?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php echo $row['jenis_kejahatan']; ?></td>
-					<td style="vertical-align: middle; border: 1px solid black;"><?php 
-			                            $tanggal_lahir = new DateTime( $row['tanggal_mulai_ditahan']);
-			                            echo $tanggal_lahir->format('d-m-Y '); // Output: 2024-07-16 12:34:56
-			                            ?></td>
+					<td style="vertical-align: middle; border: 1px solid black;"><?php
+																					$tanggal_lahir = new DateTime($row['tanggal_mulai_ditahan']);
+																					echo $tanggal_lahir->format('d-m-Y '); // Output: 2024-07-16 12:34:56
+																					?></td>
 					<td style="font-weight: bold; vertical-align: middle;border: 1px solid black;"><?php echo $row['hasil']; ?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php
-										$range = $row['hasil'];
-										if ($range > 0.70) {
-											echo "<font color='green'><b>Rekomendasi</b></font>";
-										} else {
-											echo "<font color='red'><b>Tidak Rekomendasi</b></font>";
-										}
-										?>
-											
+																					$range = $row['hasil'];
+																					if ($range > 0.70) {
+																						echo "<font color='green'><b>Rekomendasi</b></font>";
+																					} else {
+																						echo "<font color='red'><b>Tidak Rekomendasi</b></font>";
+																					}
+																					?>
+
 					</td>
-										<td style="vertical-align: middle; border: 1px solid black;"><?php 
-									if ($row['persetujuan']=='0') {
-										echo 'Belum DIsetujui';
-									}else {
-										echo "Disetujui";
-									}	
-									 ?>
-											
-										</td>
+					<td style="vertical-align: middle; border: 1px solid black;"><?php
+																					if ($row['persetujuan'] == '0') {
+																						echo 'Belum DIsetujui';
+																					} elseif ($row['persetujuan'] == '1') {
+																						echo "Disetujui";
+																					} elseif ($row['persetujuan'] == '2') {
+																						echo "Tidak Disetujui";
+																					}
+																					?>
+
+					</td>
 				</tr>
 			<?php
 				$no++;
@@ -107,7 +109,9 @@ $row = mysqli_fetch_array($sql);
 			<tr>
 				<td align="center">Kepala Divisi Permasyarakatan</td>
 			</tr>
-			<tr><td height="80%"></td></tr>
+			<tr>
+				<td height="80%"></td>
+			</tr>
 			<tr>
 				<td align="center"><br><br><br></td>
 			</tr>
@@ -119,7 +123,7 @@ $row = mysqli_fetch_array($sql);
 			</tr>
 
 		</table>
-		
+
 	</div>
 	</center>
 

@@ -1,6 +1,6 @@
 <?php
-include("proses/style/header.php");
-include("proses/style/sidebar.php");
+include("proses/style/header_kriteria.php");
+include("proses/style/sidebar_kriteria.php");
 // $idp = $_GET['idp'];
 $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $id_periode = $_GET['idp'];
@@ -137,7 +137,7 @@ if (isset($_POST['tambah'])) {
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $array['nama_kriteria']; ?></td>
                   <td><?php echo $array['jenis_kriteria']; ?></td>
-                  <td><?php echo $array['bobot'] . '/' . $totalBobot; ?></td>
+                  <td><?php echo $array['bobot']; ?></td>
                   <td>
                     <a href="edit_kriteria.php?idp=<?= $id_periode ?>&id=<?php echo $array['id_kriteria']; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
                   </td>

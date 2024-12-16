@@ -1,6 +1,6 @@
 <?php
-include("proses/style/header.php");
-include("proses/style/sidebar.php");
+include("proses/style/header_kriteria.php");
+include("proses/style/sidebar_kriteria.php");
 $id_periode = $_GET['idp'];
 ?>
 
@@ -134,7 +134,7 @@ $id_periode = $_GET['idp'];
         $itemsPerPage = 8;
 
         // Menghitung jumlah total data sub kriteria
-        $totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_subkriteria"));
+        $totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_subkriteria, tbl_kriteria WHERE tbl_subkriteria.id_kriteria = tbl_kriteria.id_kriteria AND tbl_kriteria.id_periode = $id_periode"));
 
         // Menghitung jumlah total halaman
         $totalPages = ceil($totalData / $itemsPerPage);

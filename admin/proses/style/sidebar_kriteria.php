@@ -30,14 +30,11 @@ if ($_SESSION['level'] == "") {
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="../../admin_blok/proses/index.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../admin/proses/index.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-
       <!-- Heading -->
       <div class="sidebar-heading" style="color: #ffff">
         Data
@@ -45,28 +42,24 @@ if ($_SESSION['level'] == "") {
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-
-        <a class="nav-link" href="../../admin_blok/data_kriteria.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../admin/data_kriteria.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
-          <span style="color: #ffff">Kriteria</span></a>
-
-        <a class="nav-link" href="../../admin_blok/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
+          <span style="color: #ffff">Kriteria</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../admin/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
-          <span style="color: #ffff">Alternatif</span></a>
-
-        <a class="nav-link" href="../../admin_blok/proses/data_penilaian.php?idp=<?php echo $idp; ?>">
+          <span style="color: #ffff">Alternatif</span>
+        </a>
+        <a class="nav-link" href="../admin/proses/data_penilaian.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Penilaian</span></a>
 
-        <a class="nav-link" href="../../admin_blok/proses/data_normalisasi.php?idp=<?php echo $idp; ?>">
-          <i class="fas fa-fw fa-database" style="color: #ffff"></i>
-          <span style="color: #ffff">Hasil Normalisasi</span></a>
-
-        <a class="nav-link" href="../../admin_blok/proses/hasil_keputusan.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../admin/proses/hasil_keputusan.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Hasil Keputusan</span></a>
       </li>
-
       <div class="sidebar-heading" style="color: #ffff">
         Laporan
       </div>
@@ -102,7 +95,7 @@ if ($_SESSION['level'] == "") {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand font-weight-bold topbar mb-4 static-top shadow" style="color: #0510a8; font-size: 17px">
+        <nav class="navbar navbar-expand font-weight-bold topbar mb-4 static-top shadow" style="color:#0510a8; font-size: 17px">
           Penerimaan Remisi Narapidana (Rutan Klas IIB Padang)
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -111,14 +104,14 @@ if ($_SESSION['level'] == "") {
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-              <a class="nav-link" href="../../admin_blok/periodekeputusan.php">
-                <i class="fas fa-chevron-circle-left" style="color: #0510a8"></i>
-                <span style="color: #0510a8">Home</span></a>
+              <a class="nav-link" href="../admin/periodekeputusan.php">
+                <i class="fas fa-chevron-circle-left" style="color:#0510a8"></i>
+                <span style="color:#0510a8">Home</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">
-                <i class="fas fa-fw fa-sign-out-alt" style="color: #0510a8"></i>
-                <span style="color:  #0510a8">Logout</span></a>
+              <a class="nav-link" href="../admin/logout.php">
+                <i class="fas fa-fw fa-sign-out-alt" style="color:#0510a8"></i>
+                <span style="color: #0510a8">Logout</span></a>
             </li>
 
           </ul>

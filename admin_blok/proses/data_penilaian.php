@@ -2,7 +2,7 @@
 include('../../config/koneksi.php');
 include('style/header.php');
 include('style/sidebar.php');
-
+$id_periode = $_GET['idp'];
 ?>
 <div class="container-fluid">
 	<!-- Basic Card Example -->
@@ -28,7 +28,7 @@ include('style/sidebar.php');
               </button>
             </div>';
 				} else {
-					$query2 = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+					$query2 = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $id_periode");
 					$rq2 = $query2->num_rows;
 					for ($i = 1; $i <= $rq2; $i++) {
 						$n = $_POST["k$i"];
@@ -148,7 +148,7 @@ include('style/sidebar.php');
 							<th style="vertical-align: middle;">No</th>
 							<th style="vertical-align: middle;">Nama Alternatif</th>
 							<?php
-							$sqlth = $konek->query("SELECT * FROM tbl_kriteria");
+							$sqlth = $konek->query("SELECT * FROM tbl_kriteria WHERE id_periode = $id_periode");
 							while ($rowth = $sqlth->fetch_array()) {
 							?>
 								<th style="vertical-align: middle;"><?= $rowth['nama_kriteria']; ?></th>
@@ -230,10 +230,10 @@ include('style/sidebar.php');
 						<select name="ids" class="form-control mb-2" required>
 							<option value="" disabled selected>---Pilih Alternatif---</option>
 							<?php
-							$mysqli = mysqli_query($konek, "SELECT * FROM tbl_alternatif where id_periode = '$idp'");
+							$mysqli = mysqli_query($konek, "SELECT * FROM tbl_alternatif WHERE id_periode = $id_periode AND id_alternatif NOT IN (SELECT id_alternatif FROM tbl_penilaian WHERE id_periode = $id_periode);");
 							while ($fetch = mysqli_fetch_assoc($mysqli)) {
 							?>
-								<option value="<?php echo $fetch['id_alternatif']; ?>"><?php echo $fetch['nama']; ?></option>
+								<option value="<?php echo $fetch['id_alternatif']; ?>">[<?= $fetch['id_alternatif'] ?>]<?php echo $fetch['nama']; ?></option>
 							<?php
 							}
 							?>
@@ -242,7 +242,7 @@ include('style/sidebar.php');
 						<?php
 						$c = 1;
 						$x = 1;
-						$sqlnilai = $konek->query("SELECT * FROM tbl_kriteria");
+						$sqlnilai = $konek->query("SELECT * FROM tbl_kriteria WHERE id_periode = $id_periode");
 						while ($rownilai = $sqlnilai->fetch_array()) {
 						?>
 							<label><?php echo $rownilai['nama_kriteria']; ?> (C<?= $c++; ?>)</label>

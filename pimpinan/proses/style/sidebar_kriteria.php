@@ -30,14 +30,11 @@ if ($_SESSION['level'] == "") {
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="../../admin_blok/proses/index.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../pimpinan/proses/index.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-
       <!-- Heading -->
       <div class="sidebar-heading" style="color: #ffff">
         Data
@@ -46,25 +43,22 @@ if ($_SESSION['level'] == "") {
       <!-- Nav Item - Tables -->
       <li class="nav-item">
 
-        <a class="nav-link" href="../../admin_blok/data_kriteria.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../pimpinan/data_kriteria.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Kriteria</span></a>
 
-        <a class="nav-link" href="../../admin_blok/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../pimpinan/proses/data_alternatif.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Alternatif</span></a>
 
-        <a class="nav-link" href="../../admin_blok/proses/data_penilaian.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../pimpinan/proses/data_penilaian.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Penilaian</span></a>
 
-        <a class="nav-link" href="../../admin_blok/proses/data_normalisasi.php?idp=<?php echo $idp; ?>">
-          <i class="fas fa-fw fa-database" style="color: #ffff"></i>
-          <span style="color: #ffff">Hasil Normalisasi</span></a>
-
-        <a class="nav-link" href="../../admin_blok/proses/hasil_keputusan.php?idp=<?php echo $idp; ?>">
+        <a class="nav-link" href="../pimpinan/proses/hasil_keputusan.php?idp=<?php echo $idp; ?>">
           <i class="fas fa-fw fa-database" style="color: #ffff"></i>
           <span style="color: #ffff">Hasil Keputusan</span></a>
+
       </li>
 
       <div class="sidebar-heading" style="color: #ffff">
@@ -111,12 +105,12 @@ if ($_SESSION['level'] == "") {
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-              <a class="nav-link" href="../../admin_blok/periodekeputusan.php">
+              <a class="nav-link" href="../pimpinan/periodekeputusan.php">
                 <i class="fas fa-chevron-circle-left" style="color: #0510a8"></i>
                 <span style="color: #0510a8">Home</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">
+              <a class="nav-link" href="../pimpinan/logout.php">
                 <i class="fas fa-fw fa-sign-out-alt" style="color: #0510a8"></i>
                 <span style="color:  #0510a8">Logout</span></a>
             </li>

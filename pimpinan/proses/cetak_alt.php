@@ -32,42 +32,66 @@ $row = mysqli_fetch_array($sql);
 		$halt = mysqli_fetch_array($alt);
 		?>
 		<p style="font-size:24px;padding:0px;margin-bottom:0px; color: #000000; font-weight: bold;">Data Hasil Keputusan</p>
+		<br>
 		<table>
 			<tbody style="font-size: 18px">
 				<tr>
-					<th width="160px">No Registrasi Instansi</th>
-					<td width="20px">:</td>
+					<th width="50%">No Registrasi Instansi</th>
+					<td>:</td>
 					<td><?php echo $halt['id_alternatif']; ?></td>
 				</tr>
 				<tr>
-					<th width="160px">Nama</th>
-					<td width="20px">:</td>
+					<th width="50%">Nama</th>
+					<td>:</td>
 					<td><?php echo $halt['nama']; ?></td>
 				</tr>
 
 				<tr>
-					<th width="150px">Jenis Kelamin</th>
-					<td width="20px">:</td>
+					<th width="50%">Jenis Kelamin</th>
+					<td>:</td>
 					<td><?php echo $halt['jenis_kelamin']; ?></td>
 				</tr>
 				<tr>
-					<th width="150px">Jenis Kejahatan</th>
-					<td width="20px">:</td>
+					<th width="50%">Jenis Kejahatan</th>
+					<td>:</td>
 					<td><?php echo $halt['jenis_kejahatan']; ?></td>
 				</tr>
 				<tr>
-					<th width="150px">Tanggal Mulai Ditahan</th>
-					<td width="20px">:</td>
+					<th width="50%">Tanggal Mulai Ditahan</th>
+					<td>:</td>
 					<td><?php $tanggal_mulai_ditahan = new DateTime($halt['tanggal_mulai_ditahan']);
 						echo $tanggal_mulai_ditahan->format('d-m-Y '); ?></td>
 				</tr>
 				<tr>
-					<th width="150px">Periode</th>
-					<td width="20px">:</td>
-					<td><?php echo $row['keterangan']; ?></td>
+					<th width="50%">Lama Ditahan</th>
+					<td>:</td>
+					<td>
+						<?php
+						$tanggalMulaiDitahan = new DateTime($halt['tanggal_mulai_ditahan']);
+
+						$tanggalHariIni = new DateTime();
+
+						$selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
+
+						$lamaDitahan = '';
+						if ($selisih->y > 0) {
+							$lamaDitahan .= $selisih->y . ' tahun ';
+						}
+						if ($selisih->m > 0) {
+							$lamaDitahan .= $selisih->m . ' bulan';
+						}
+						if (empty($lamaDitahan)) {
+							$lamaDitahan = 'Kurang dari 1 bulan';
+						}
+
+						echo trim($lamaDitahan);
+						?>
+					</td>
 				</tr>
 				<tr>
-
+					<th width="50%">Periode</th>
+					<td>:</td>
+					<td><?php echo $row['keterangan']; ?></td>
 				</tr>
 			</tbody>
 		</table>

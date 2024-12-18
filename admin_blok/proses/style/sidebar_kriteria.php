@@ -116,7 +116,7 @@ if ($_SESSION['level'] == "") {
                 <span style="color: #0510a8">Home</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">
+              <a class="nav-link" href="logout.php">
                 <i class="fas fa-fw fa-sign-out-alt" style="color: #0510a8"></i>
                 <span style="color:  #0510a8">Logout</span></a>
             </li>

@@ -158,7 +158,17 @@ $nilai = array();
                         $no = 1;
                         $query = mysqli_query($konek, "SELECT DISTINCT * FROM tbl_penilaian a JOIN tbl_alternatif b ON a.id_alternatif = b.id_alternatif WHERE a.id_periode = '$idp' GROUP BY a.id_alternatif");
 
-
+                        $kriteria_vis = $konek->query("SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
+                        $data_array = [];
+                        $id = [];
+                        if ($kriteria_vis->num_rows > 0) {
+                            while ($row = $kriteria_vis->fetch_assoc()) {
+                                $data_array[] = $row;
+                            }
+                        }
+                        foreach ($data_array as $dataArray) {
+                            $id[] = $data_array[0]['id_kriteria'];
+                        }
                         ?>
                         <script>
                             var data_alternatif1 = [<?php mysqli_data_seek($query, 0);
@@ -168,7 +178,7 @@ $nilai = array();
                             var c1 = [
                                 <?php
 
-                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = 1 order by a.id_alternatif ASC");
+                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = $id[0] order by a.id_alternatif ASC");
                                 while ($rowq2 = $query2->fetch_array()) {
                                     echo '"' . $rowq2['nbobot'] . '",';
                                 }
@@ -178,7 +188,7 @@ $nilai = array();
                             var c2 = [
                                 <?php
 
-                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = 2 order by a.id_alternatif ASC");
+                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = $id[1] order by a.id_alternatif ASC");
                                 while ($rowq2 = $query2->fetch_array()) {
                                     echo '"' . $rowq2['nbobot'] . '",';
                                 }
@@ -188,7 +198,7 @@ $nilai = array();
                             var c3 = [
                                 <?php
 
-                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = 3 order by a.id_alternatif ASC");
+                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = $id[2] order by a.id_alternatif ASC");
                                 while ($rowq2 = $query2->fetch_array()) {
                                     echo '"' . $rowq2['nbobot'] . '",';
                                 }
@@ -198,7 +208,7 @@ $nilai = array();
                             var c4 = [
                                 <?php
 
-                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = 4 order by a.id_alternatif ASC");
+                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = $id[3] order by a.id_alternatif ASC");
                                 while ($rowq2 = $query2->fetch_array()) {
                                     echo '"' . $rowq2['nbobot'] . '",';
                                 }
@@ -208,7 +218,7 @@ $nilai = array();
                             var c5 = [
                                 <?php
 
-                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = 5 order by a.id_alternatif ASC");
+                                $query2 = $konek->query("SELECT * FROM tbl_penilaian a JOIN tbl_subkriteria b ON a.id_subkriteria = b.id_subkriteria WHERE a.id_periode = '$idp' AND b.id_kriteria = $id[4] order by a.id_alternatif ASC");
                                 while ($rowq2 = $query2->fetch_array()) {
                                     echo '"' . $rowq2['nbobot'] . '",';
                                 }
@@ -216,14 +226,13 @@ $nilai = array();
                                 ?>
                             ];
 
-
                             var ctx = document.getElementById("barChart1").getContext('2d');
                             var barChart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
                                     labels: data_alternatif1,
                                     datasets: [{
-                                            label: 'Kesadaran Beragama',
+                                            label: '<?= $data_array[0]['nama_kriteria'] ?>',
                                             backgroundColor: 'rgba(1, 4, 74 )',
                                             borderColor: '#355E3B',
                                             hoverBackgroundColor: 'rgba(1, 4, 74 )',
@@ -231,7 +240,7 @@ $nilai = array();
                                             data: c1
                                         },
                                         {
-                                            label: 'Kondisi Mental',
+                                            label: '<?= $data_array[1]['nama_kriteria'] ?>',
                                             backgroundColor: 'rgba(33, 158, 188)',
                                             borderColor: 'rgba(200, 200, 200, 0.75)',
                                             hoverBackgroundColor: 'rgba(33, 158, 188)',
@@ -239,7 +248,7 @@ $nilai = array();
                                             data: c2
                                         },
                                         {
-                                            label: 'Berkelakuan Baik',
+                                            label: '<?= $data_array[2]['nama_kriteria'] ?>',
                                             backgroundColor: 'rgba(142, 202, 230)',
                                             borderColor: 'rgba(200, 200, 200, 0.75)',
                                             hoverBackgroundColor: 'rgba(142, 202, 230)',
@@ -247,7 +256,7 @@ $nilai = array();
                                             data: c3
                                         },
                                         {
-                                            label: 'Pembinaan Kemandirian',
+                                            label: '<?= $data_array[3]['nama_kriteria'] ?>',
                                             backgroundColor: 'rgba(255, 189, 105)',
                                             borderColor: 'rgba(200, 200, 200, 0.75)',
                                             hoverBackgroundColor: 'rgba(255, 189, 105)',
@@ -255,7 +264,7 @@ $nilai = array();
                                             data: c4
                                         },
                                         {
-                                            label: 'Berjasa',
+                                            label: '<?= $data_array[4]['nama_kriteria'] ?>',
                                             backgroundColor: 'rgba(255, 99, 99)',
                                             borderColor: 'rgba(200, 200, 200, 0.75)',
                                             hoverBackgroundColor: 'rgba(255, 99, 99)',
@@ -291,7 +300,6 @@ $nilai = array();
         </div>
         </div>
     </section>
-
     </div>
 </body>
 

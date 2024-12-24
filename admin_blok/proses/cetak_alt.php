@@ -62,30 +62,9 @@ $row = mysqli_fetch_array($sql);
 						echo $tanggal_mulai_ditahan->format('d-m-Y '); ?></td>
 				</tr>
 				<tr>
-					<th width="50%">Lama Ditahan</th>
+					<th width="50%">Lama Pidana</th>
 					<td>:</td>
-					<td>
-						<?php
-						$tanggalMulaiDitahan = new DateTime($halt['tanggal_mulai_ditahan']);
-
-						$tanggalHariIni = new DateTime();
-
-						$selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
-
-						$lamaDitahan = '';
-						if ($selisih->y > 0) {
-							$lamaDitahan .= $selisih->y . ' tahun ';
-						}
-						if ($selisih->m > 0) {
-							$lamaDitahan .= $selisih->m . ' bulan';
-						}
-						if (empty($lamaDitahan)) {
-							$lamaDitahan = 'Kurang dari 1 bulan';
-						}
-
-						echo trim($lamaDitahan);
-						?>
-					</td>
+					<td><?= $halt['lama_pidana'] ?></td>
 				</tr>
 				<tr>
 					<th width="50%">Periode</th>

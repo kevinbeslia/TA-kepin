@@ -175,26 +175,7 @@ $idp = $_GET['idp'];
                     echo $tanggal_mulai_ditahan->format('d-m-Y ');
                     ?></td>
                 <td>
-                  <?php
-                  $tanggalMulaiDitahan = new DateTime($array['tanggal_mulai_ditahan']);
-
-                  $tanggalHariIni = new DateTime();
-
-                  $selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
-
-                  $lamaDitahan = '';
-                  if ($selisih->y > 0) {
-                    $lamaDitahan .= $selisih->y . ' tahun ';
-                  }
-                  if ($selisih->m > 0) {
-                    $lamaDitahan .= $selisih->m . ' bulan';
-                  }
-                  if (empty($lamaDitahan)) {
-                    $lamaDitahan = 'Kurang dari 1 bulan';
-                  }
-
-                  echo trim($lamaDitahan);
-                  ?>
+                  <?= $array['lama_pidana'] ?>
                 </td>
               </tr>
             </tbody>

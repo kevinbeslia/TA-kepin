@@ -25,7 +25,7 @@ $row = mysqli_fetch_array($sql);
 	</center>
 	<?php
 	$no = 1;
-	$q = mysqli_query($konek, "SELECT * FROM  tbl_hasil a LEFT JOIN tbl_alternatif b on a.id_alternatif = b.id_alternatif WHERE a.id_periode = '$idp' ORDER BY a.hasil DESC");
+	$q = mysqli_query($konek, "SELECT * FROM  tbl_hasil a LEFT JOIN tbl_alternatif b on a.id_alternatif = b.id_alternatif WHERE a.id_periode = '$idp' AND a.persetujuan = '1' ORDER BY a.hasil DESC");
 	?>
 	<div class="container-fluid">
 
@@ -42,7 +42,7 @@ $row = mysqli_fetch_array($sql);
 					<th style="width: 180px; vertical-align: middle; border: 1px solid black;">Jenis Kelamin</th>
 					<th style="width: 220px; vertical-align: middle; border: 1px solid black;">Jenis Kejahatan</th>
 					<th style="vertical-align: middle; border: 1px solid black;">Tanggal Mulai Ditahan</th>
-					<th style="vertical-align: middle; border: 1px solid black;">Lama Ditahan</th>
+					<th style="vertical-align: middle; border: 1px solid black;">Lama Pidana</th>
 					<th style="vertical-align: middle; border: 1px solid black;">Nilai Preferensi</th>
 					<th style="vertical-align: middle; border: 1px solid black;">Rekomendasi Kelayakan</th>
 				</thead>
@@ -66,26 +66,7 @@ $row = mysqli_fetch_array($sql);
 																					echo $tanggal_lahir->format('d-m-Y '); // Output: 2024-07-16 12:34:56
 																					?></td>
 					<td style="vertical-align: middle; border: 1px solid black;">
-						<?php
-						$tanggalMulaiDitahan = new DateTime($row['tanggal_mulai_ditahan']);
-
-						$tanggalHariIni = new DateTime();
-
-						$selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
-
-						$lamaDitahan = '';
-						if ($selisih->y > 0) {
-							$lamaDitahan .= $selisih->y . ' tahun ';
-						}
-						if ($selisih->m > 0) {
-							$lamaDitahan .= $selisih->m . ' bulan';
-						}
-						if (empty($lamaDitahan)) {
-							$lamaDitahan = 'Kurang dari 1 bulan';
-						}
-
-						echo trim($lamaDitahan);
-						?>
+						<?= $row['lama_pidana'] ?>
 					</td>
 					<td style="font-weight: bold; vertical-align: middle;border: 1px solid black;"><?php echo $row['hasil']; ?></td>
 					<td style="vertical-align: middle; border: 1px solid black;"><?php

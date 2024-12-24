@@ -152,7 +152,7 @@ $idp = $_GET['idp'];
               <th>Jenis Kelamin</th>
               <th>Jenis Kejahatan</th>
               <th>Tanggal Mulai Ditahan</th>
-              <th>Lama Ditahan</th>
+              <th>Lama Pidana</th>
             </tr>
           </thead>
           <?php
@@ -176,26 +176,7 @@ $idp = $_GET['idp'];
                   ?>
                 </td>
                 <td>
-                  <?php
-                  $tanggalMulaiDitahan = new DateTime($array['tanggal_mulai_ditahan']);
-
-                  $tanggalHariIni = new DateTime();
-
-                  $selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
-
-                  $lamaDitahan = '';
-                  if ($selisih->y > 0) {
-                    $lamaDitahan .= $selisih->y . ' tahun ';
-                  }
-                  if ($selisih->m > 0) {
-                    $lamaDitahan .= $selisih->m . ' bulan';
-                  }
-                  if (empty($lamaDitahan)) {
-                    $lamaDitahan = 'Kurang dari 1 bulan';
-                  }
-
-                  echo trim($lamaDitahan);
-                  ?>
+                  <?= $array['lama_pidana'] ?>
                 </td>
               </tr>
             </tbody>

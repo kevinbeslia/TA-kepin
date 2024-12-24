@@ -6,6 +6,24 @@ $idp = $_GET['idp'];
 
 
 ?>
+<script>
+  function validateForm() {
+    const years = document.getElementById('years').value;
+    const months = document.getElementById('months').value;
+
+    if (!years && !months) {
+      alert('Anda harus mengisi salah satu dari Tahun atau Bulan Lama Pidana.');
+      return false;
+    }
+
+    if (months && (months < 0 || months > 11)) {
+      alert('Bulan harus di antara 0 hingga 11.');
+      return false;
+    }
+
+    return true;
+  }
+</script>
 <div class="container-fluid">
   <!-- Basic Card Example -->
   <div class="card shadow mt-3 mb-3">
@@ -25,6 +43,14 @@ $idp = $_GET['idp'];
         $id_blok  = $_SESSION['id_blok'];
         $id_periode  = $idp;
 
+        if ($_POST['tahun'] == '') {
+          $lama_pidana = $_POST['bulan'] . ' bulan';
+        } elseif ($_POST['bulan'] == '') {
+          $lama_pidana = $_POST['tahun'] . ' tahun';
+        } else {
+          $lama_pidana = $_POST['tahun'] . ' tahun ' . $_POST['bulan'] . ' bulan';
+        }
+
         // Periksa apakah nama alternatif sudah ada dalam periode
         $checkDuplicate = mysqli_query($konek, "SELECT * FROM tbl_alternatif WHERE id_alternatif='$id_alternatif' AND id_periode='$id_periode'");
 
@@ -37,7 +63,7 @@ $idp = $_GET['idp'];
               </div>';
         } else {
           // Lanjutkan dengan penambahan data
-          $save = mysqli_query($konek, "INSERT INTO tbl_alternatif VALUES('$id_alternatif', '$nama', '$tanggal_lahir', '$jenis_kelamin', '$jenis_kejahatan', '$tanggal_mulai_ditahan', '$id_blok','$id_periode')");
+          $save = mysqli_query($konek, "INSERT INTO tbl_alternatif VALUES('$id_alternatif', '$nama', '$tanggal_lahir', '$jenis_kelamin', '$jenis_kejahatan', '$tanggal_mulai_ditahan', '$lama_pidana', '$id_blok','$id_periode')");
 
           if ($save) {
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -159,7 +185,7 @@ $idp = $_GET['idp'];
               <th>Jenis Kelamin</th>
               <th>Jenis Kejahatan</th>
               <th>Tanggal Mulai Ditahan</th>
-              <th>Lama Ditahan</th>
+              <th>Lama Pidana</th>
               <th colspan="2">Aksi</th>
             </tr>
           </thead>
@@ -182,26 +208,7 @@ $idp = $_GET['idp'];
                     echo $tanggal_mulai_ditahan->format('d-m-Y ');
                     ?></td>
                 <td>
-                  <?php
-                  $tanggalMulaiDitahan = new DateTime($array['tanggal_mulai_ditahan']);
-
-                  $tanggalHariIni = new DateTime();
-
-                  $selisih = $tanggalMulaiDitahan->diff($tanggalHariIni);
-
-                  $lamaDitahan = '';
-                  if ($selisih->y > 0) {
-                    $lamaDitahan .= $selisih->y . ' tahun ';
-                  }
-                  if ($selisih->m > 0) {
-                    $lamaDitahan .= $selisih->m . ' bulan';
-                  }
-                  if (empty($lamaDitahan)) {
-                    $lamaDitahan = 'Kurang dari 1 bulan';
-                  }
-
-                  echo trim($lamaDitahan);
-                  ?>
+                  <?= $array['lama_pidana'] ?>
                 </td>
                 <td>
                   <a href="edit_alternatif.php?id=<?php echo $array['id_alternatif']; ?>&idp=<?php echo $idp; ?>&page=<?php echo $currentPage; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-edit"></span></i></a>
@@ -248,7 +255,7 @@ $idp = $_GET['idp'];
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
           <div class="form-group">
 
             <label>No Registrasi Instansi</label>
@@ -286,6 +293,21 @@ $idp = $_GET['idp'];
             <label>Tanggal Mulai Ditahan</label>
             <input type="date" class="form-control mb-2" name="tanggal_mulai_ditahan" required="" autocomplete="off">
 
+            <label>Lama Pidana</label>
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="number" id="years" name="tahun" min="0" class="form-control" placeholder="0">
+                  <span class="input-group-text">Tahun</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="number" id="months" name="bulan" min="0" max="11" class="form-control" placeholder="0">
+                  <span class="input-group-text">Bulan</span>
+                </div>
+              </div>
+            </div>
           </div>
       </div>
       <div class="modal-footer">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2024 at 08:41 AM
+-- Generation Time: Dec 26, 2024 at 01:21 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -34,6 +34,7 @@ CREATE TABLE `tbl_alternatif` (
   `jenis_kelamin` varchar(15) NOT NULL,
   `jenis_kejahatan` varchar(255) NOT NULL,
   `tanggal_mulai_ditahan` date NOT NULL,
+  `lama_pidana` varchar(20) NOT NULL,
   `id_blok` int(11) NOT NULL,
   `id_periode` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -42,19 +43,19 @@ CREATE TABLE `tbl_alternatif` (
 -- Dumping data for table `tbl_alternatif`
 --
 
-INSERT INTO `tbl_alternatif` (`id_alternatif`, `nama`, `tanggal_lahir`, `jenis_kelamin`, `jenis_kejahatan`, `tanggal_mulai_ditahan`, `id_blok`, `id_periode`) VALUES
-('A.1', 'kevin', '2014-02-14', 'Laki-Laki', 'Kesusilaan', '2024-11-12', 1, 19),
-('A.2', 'Rapi', '2000-12-10', 'Laki-Laki', 'Kekerasan dalam Rumah Tangga', '2020-12-07', 1, 19),
-('B.I-124/2022', 'Adek Irwan', '1983-11-09', 'Laki-Laki', 'Narkotika', '2021-05-29', 1, 12),
-('B.I-124/2024', 'Fauzan', '2012-06-05', 'Laki-Laki', 'Kekerasan dalam Rumah Tangga', '2024-11-05', 1, 12),
-('B.I-146/2022', 'Beni Afrianto', '1993-11-03', 'Laki-Laki', 'Narkotika', '2021-09-09', 1, 12),
-('B.I-146/2023', 'Andri Arjuna', '1986-01-18', 'Laki-Laki', 'Pencurian', '2022-08-19', 1, 12),
-('B.I-152/2021', 'Ryan Hidayatullah', '1987-10-31', 'Laki-Laki', 'Pencurian', '2020-06-03', 1, 12),
-('B.I-159/2023', 'Agus Nopriadi Siritoitet', '1986-10-19', 'Laki-Laki', 'Perlindungan Anak', '2022-07-30', 1, 12),
-('B.I-196/2023', 'Aditya Nurhidayat', '1991-07-20', 'Laki-Laki', 'Perlindungan Anak', '2022-08-02', 1, 12),
-('B.I-203/2022', 'Diky Wahyudi', '1988-09-01', 'Laki-Laki', 'Perampokan', '2022-10-22', 1, 12),
-('B.I-372/2022', 'Sepdi Herman', '1998-06-19', 'Laki-Laki', 'Perlindungan Anak', '2022-11-11', 1, 12),
-('B.I-764/2022', 'Dodi Linastra', '2002-02-28', 'Laki-Laki', 'Narkotika', '2022-05-31', 1, 12);
+INSERT INTO `tbl_alternatif` (`id_alternatif`, `nama`, `tanggal_lahir`, `jenis_kelamin`, `jenis_kejahatan`, `tanggal_mulai_ditahan`, `lama_pidana`, `id_blok`, `id_periode`) VALUES
+('A.1', 'kevin', '2014-02-14', 'Laki-Laki', 'Kesusilaan', '2024-11-12', '1 tahun', 1, 19),
+('A.2', 'Rapi', '2000-12-10', 'Laki-Laki', 'Kekerasan dalam Rumah Tangga', '2020-12-07', '1 tahun', 1, 19),
+('B.I-124/2022', 'Adek Irwan', '1983-11-09', 'Laki-Laki', 'Narkotika', '2021-05-29', '2 bulan', 1, 12),
+('B.I-124/2024', 'Fauzan', '2012-06-05', 'Laki-Laki', 'Kekerasan dalam Rumah Tangga', '2024-11-05', '1 tahun 5 bulan', 1, 12),
+('B.I-146/2022', 'Beni Afrianto', '1993-11-03', 'Laki-Laki', 'Narkotika', '2021-09-09', '1 tahun', 1, 12),
+('B.I-146/2023', 'Andri Arjuna', '1986-01-18', 'Laki-Laki', 'Pencurian', '2022-08-19', '1 tahun', 1, 12),
+('B.I-152/2021', 'Ryan Hidayatullah', '1987-10-31', 'Laki-Laki', 'Pencurian', '2020-06-03', '1 tahun', 1, 12),
+('B.I-159/2023', 'Agus Nopriadi Siritoitet', '1986-10-19', 'Laki-Laki', 'Perlindungan Anak', '2022-07-30', '1 tahun', 1, 12),
+('B.I-196/2023', 'Aditya Nurhidayat', '1991-07-20', 'Laki-Laki', 'Perlindungan Anak', '2022-08-02', '1 tahun', 1, 12),
+('B.I-203/2022', 'Diky Wahyudi', '1988-09-01', 'Laki-Laki', 'Perampokan', '2022-10-22', '1 tahun', 1, 12),
+('B.I-372/2022', 'Sepdi Herman', '1998-06-19', 'Laki-Laki', 'Perlindungan Anak', '2022-11-11', '1 tahun', 1, 12),
+('B.I-764/2022', 'Dodi Linastra', '2002-02-28', 'Laki-Laki', 'Narkotika', '2022-05-31', '2 tahun 3 bulan', 1, 12);
 
 -- --------------------------------------------------------
 
@@ -99,8 +100,8 @@ INSERT INTO `tbl_hasil` (`id_hasil`, `id_alternatif`, `id_periode`, `hasil`, `pe
 (44, 'A.1', 19, 0.2, '0'),
 (45, 'A.2', 19, 1, '0'),
 (46, 'B.I-124/2022', 12, 0.244741596, '0'),
-(47, 'B.I-124/2024', 12, 1, '0'),
-(48, 'B.I-146/2022', 12, 0.720614939, '0');
+(47, 'B.I-124/2024', 12, 1, '1'),
+(48, 'B.I-146/2022', 12, 0.720614939, '2');
 
 -- --------------------------------------------------------
 

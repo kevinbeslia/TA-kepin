@@ -36,7 +36,7 @@ if (isset($_POST['tambah'])) {
     $totalBobotKriteria = mysqli_query($konek, "SELECT sum(bobot) AS total_bobot FROM tbl_kriteria WHERE id_periode = $id_periode");
     $totalBobotKriteria = mysqli_fetch_assoc($totalBobotKriteria);
     $sisabobot = 1 - $totalBobotKriteria['total_bobot'];
-    if ($bobot > 1 - $sisabobot) {
+    if (abs($bobot - $sisabobot) > 0.00001) {
       echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Gagal menambahkan data kriteria! Bobot yang diinputkan melebihi batas, total bobot maksimal yaitu 1
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

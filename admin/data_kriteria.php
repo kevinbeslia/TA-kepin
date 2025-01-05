@@ -36,13 +36,34 @@ if (isset($_POST['tambah'])) {
     $totalBobotKriteria = mysqli_query($konek, "SELECT sum(bobot) AS total_bobot FROM tbl_kriteria WHERE id_periode = $id_periode");
     $totalBobotKriteria = mysqli_fetch_assoc($totalBobotKriteria);
     $sisabobot = 1 - $totalBobotKriteria['total_bobot'];
-    if (abs($bobot - $sisabobot) > 0.00001) {
-      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Gagal menambahkan data kriteria! Bobot yang diinputkan melebihi batas, total bobot maksimal yaitu 1
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>';
+    if ($bobot > $sisabobot) {
+      if (abs($bobot - $sisabobot) > 0.00001) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  Gagal menambahkan data kriteria! Bobot yang diinputkan melebihi batas, total bobot maksimal yaitu 1
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+      } else {
+        // Jika belum ada, lanjutkan dengan penyimpanan
+        $save = mysqli_query($konek, "INSERT INTO tbl_kriteria (id_periode, nama_kriteria, jenis_kriteria, bobot) VALUES ($id_periode, '$nama_kriteria', '$jenis_kriteria', $bobot)");
+
+        if ($save) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                      Data Kriteria Berhasil Ditambahkan!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>';
+        } else {
+          echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      Data Kriteria Gagal Ditambahkan!
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>';
+        }
+      }
     } else {
       // Jika belum ada, lanjutkan dengan penyimpanan
       $save = mysqli_query($konek, "INSERT INTO tbl_kriteria (id_periode, nama_kriteria, jenis_kriteria, bobot) VALUES ($id_periode, '$nama_kriteria', '$jenis_kriteria', $bobot)");

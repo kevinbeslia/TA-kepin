@@ -13,7 +13,7 @@ if (isset($_POST['tambah'])) {
   $bobot = $_POST['bobot'];
 
   // Cek apakah kombinasi nama sub kriteria dan nilai bobot sudah ada
-  $checkDuplicateQuery = "SELECT * FROM tbl_kriteria WHERE nama_kriteria = '$nama_kriteria' AND jenis_kriteria = '$jenis_kriteria' AND bobot = '$bobot'";
+  $checkDuplicateQuery = "SELECT * FROM tbl_kriteria WHERE nama_kriteria = '$nama_kriteria' AND jenis_kriteria = '$jenis_kriteria' AND bobot = '$bobot' AND id_periode = $id_periode";
   $checkDuplicateResult = mysqli_query($konek, $checkDuplicateQuery);
 
   if (mysqli_num_rows($checkDuplicateResult) > 0) {
@@ -24,7 +24,7 @@ if (isset($_POST['tambah'])) {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>';
-  } elseif (mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE nama_kriteria = '$nama_kriteria' AND (jenis_kriteria = '$jenis_kriteria' OR bobot = '$bobot')")) > 0) {
+  } elseif (mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE nama_kriteria = '$nama_kriteria' AND (jenis_kriteria = '$jenis_kriteria' OR bobot = '$bobot') AND id_periode = $id_periode")) > 0) {
     // Jika nama sub kriteria sudah ada, tapi nilai bobot berbeda
     echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
                 Nama Kriteria atau Nilai Bobot Yang Sama Sudah Ada Pada Kriteria Tersebut!

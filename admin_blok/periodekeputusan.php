@@ -1,6 +1,6 @@
-<?php 
-  include ("style/header.php");
-  include ("style/sidebarawal.php");
+<?php
+include("style/header.php");
+include("style/sidebarawal.php");
 ?>
 <div class="container-fluid">
   <div class="col-lg-12">
@@ -10,144 +10,143 @@
         <h6 class="m-0 font-weight-bold" style="color: #0510a8">Periode Pengambilan Keputusan</h6>
       </div>
       <div class="card-body">
-<?php 
-  include ("../config/koneksi.php");
-  if (isset($_POST['tambah'])) {
-    $keterangan = $_POST['keterangan'];
-    $tahun      = $_POST['tahun'];
+        <?php
+        include("../config/koneksi.php");
+        if (isset($_POST['tambah'])) {
+          $keterangan = $_POST['keterangan'];
+          $tahun      = $_POST['tahun'];
 
-    
-    // Validasi 1: Menangani jika ada nama keterangan dan tanggal periode yang sama
-    $checkDuplicateBoth = mysqli_query($konek, "SELECT * FROM tbl_periode WHERE keterangan = '$keterangan' AND periode = '$tahun'");
-    if (mysqli_num_rows($checkDuplicateBoth) > 0) {
-        echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+
+          // Validasi 1: Menangani jika ada nama keterangan dan tanggal periode yang sama
+          $checkDuplicateBoth = mysqli_query($konek, "SELECT * FROM tbl_periode WHERE keterangan = '$keterangan' AND periode = '$tahun'");
+          if (mysqli_num_rows($checkDuplicateBoth) > 0) {
+            echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
         Nama Keterangan dan Tanggal Periode Yang Sama Sudah Ada!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
         </div>';
-    // Validasi 2: Menangani jika ada nama keterangan Atau tanggal periode yang sama
-    } elseif (mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_periode WHERE (keterangan = '$keterangan' OR periode = '$tahun')")) > 0) {
-        echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+            // Validasi 2: Menangani jika ada nama keterangan Atau tanggal periode yang sama
+          } elseif (mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_periode WHERE (keterangan = '$keterangan' OR periode = '$tahun')")) > 0) {
+            echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
         Nama Keterangan Atau Tanggal Periode Yang Sama Sudah Ada!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
         </div>';
-     } else {
-        $save = mysqli_query($konek,"INSERT INTO tbl_periode VALUES('','$keterangan','$tahun')");
-        if($save) {
-          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          } else {
+            $save = mysqli_query($konek, "INSERT INTO tbl_periode VALUES('','$keterangan','$tahun')");
+            if ($save) {
+              echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
           Data Periode Pengambilan Keputusan Berhasil Ditambahkan!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>';
-        } else {
-          echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            } else {
+              echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
           Data Periode Pengambilan Keputusan Gagal Ditambahkan!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>';
+            }
+          }
         }
-      }
-  }
-?>
+        ?>
 
- <?php
-       if (isset($_GET['delete_success'])) {
-        if ($_GET['delete_success'] == 'true') {
+        <?php
+        if (isset($_GET['delete_success'])) {
+          if ($_GET['delete_success'] == 'true') {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Data Periode Pengambilan Keputusan Berhasil Dihapus!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="removeDeleteSuccess()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                   </div>';
-                  
-        } else {
+          } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Data Periode Pengambilan Keputusan Gagal Dihapus!!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="removeDeleteSuccess()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                   </div>';
+          }
         }
-    }
-    ?>
+        ?>
 
-<script>
-function removeDeleteSuccess() {
-    // Mendapatkan URL saat ini
-    var currentUrl = window.location.href;
-    
-    // Menghapus parameter edit_success dari URL
-    var newUrl = currentUrl.replace(/(\?|&)delete_success=(true|false)/, '');
+        <script>
+          function removeDeleteSuccess() {
+            // Mendapatkan URL saat ini
+            var currentUrl = window.location.href;
 
-    // Mengarahkan pengguna kembali ke URL baru tanpa parameter edit_success
-    window.location.href = newUrl;
-}
-</script>
+            // Menghapus parameter edit_success dari URL
+            var newUrl = currentUrl.replace(/(\?|&)delete_success=(true|false)/, '');
 
-<?php
-// Jumlah data per halaman
-$itemsPerPage = 8;
+            // Mengarahkan pengguna kembali ke URL baru tanpa parameter edit_success
+            window.location.href = newUrl;
+          }
+        </script>
 
-// Menghitung jumlah total data periode
-$totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_periode"));
+        <?php
+        // Jumlah data per halaman
+        $itemsPerPage = 8;
 
-// Menghitung jumlah total halaman
-$totalPages = ceil($totalData / $itemsPerPage);
+        // Menghitung jumlah total data periode
+        $totalData = mysqli_num_rows(mysqli_query($konek, "SELECT * FROM tbl_periode"));
 
-// Mengambil nomor halaman dari parameter URL
-$currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        // Menghitung jumlah total halaman
+        $totalPages = ceil($totalData / $itemsPerPage);
 
-// Menghitung offset untuk query database
-$offset = ($currentPage - 1) * $itemsPerPage;
+        // Mengambil nomor halaman dari parameter URL
+        $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY id_periode ASC LIMIT $offset, $itemsPerPage");
-$no = $offset + 1;
-?>
+        // Menghitung offset untuk query database
+        $offset = ($currentPage - 1) * $itemsPerPage;
 
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr align="center" style="background-color: #529dff; color: #ffff">
-              <th>No</th>
-              <th>Keterangan</th>
-              <th colspan="3">Aksi</th>
-            </tr>
-          </thead>
-          <?php 
+        $sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY id_periode ASC LIMIT $offset, $itemsPerPage");
+        $no = $offset + 1;
+        ?>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr align="center" style="background-color: #529dff; color: #ffff">
+                <th>No</th>
+                <th>Keterangan</th>
+                <th colspan="3">Aksi</th>
+              </tr>
+            </thead>
+            <?php
             include("../config/koneksi.php");
-            $no=1;
-            $sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY id_periode ASC");
-            while($array = mysqli_fetch_assoc($sql)){
-          ?>
-          <tbody>
-            <tr style="color: #355E3B" align="center">
-              <td><?php echo $no++; ?></td>
-              <td><?php echo $array['keterangan']; ?></td>
-              <td><a href="proses/index.php?idp=<?php echo $array['id_periode'];?>"><i class="btn btn-info btn-sm"><span class="fas fa-search"></span></i></a></td>
-            </tr>
-          </tbody>
-          <?php 
-          } 
-          ?>
-        </table>
+            $no = 1;
+            $sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY RIGHT(keterangan, 4) DESC");
+            while ($array = mysqli_fetch_assoc($sql)) {
+            ?>
+              <tbody>
+                <tr style="color: #355E3B" align="center">
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo $array['keterangan']; ?></td>
+                  <td><a href="proses/index.php?idp=<?php echo $array['id_periode']; ?>"><i class="btn btn-info btn-sm"><span class="fas fa-search"></span></i></a></td>
+                </tr>
+              </tbody>
+            <?php
+            }
+            ?>
+          </table>
 
-    <nav aria-label="Pagination">
-      <ul class="pagination justify-content-end">
-      <?php
-      for ($page = 1; $page <= $totalPages; $page++) {
-        echo '<li class="page-item ' . ($page === $currentPage ? 'active' : '') . '">
+          <nav aria-label="Pagination">
+            <ul class="pagination justify-content-end">
+              <?php
+              for ($page = 1; $page <= $totalPages; $page++) {
+                echo '<li class="page-item ' . ($page === $currentPage ? 'active' : '') . '">
             <a class="page-link" href="?page=' . $page . '">' . $page . '</a>
           </li>';
-      }
-      ?>
-    </ul>
-  </nav>
-      </div>
+              }
+              ?>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
@@ -175,7 +174,7 @@ $no = $offset + 1;
       <div class="modal-footer">
         <button type="submit" name="tambah" class="btn btn-primary btn-sm">Tambah</button>
       </div>
-        </form>
+      </form>
     </div>
   </div>
 </div>
@@ -183,6 +182,6 @@ $no = $offset + 1;
 
 
 
-<?php 
-  include ("style/footer.php");
+<?php
+include("style/footer.php");
 ?>

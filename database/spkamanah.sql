@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2024 at 01:21 PM
+-- Generation Time: Jan 05, 2025 at 05:49 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -131,7 +131,12 @@ INSERT INTO `tbl_kriteria` (`id_kriteria`, `id_periode`, `nama_kriteria`, `jenis
 (31, 19, 'k19-3', 'Benefit', 0.05),
 (32, 19, 'k19-4', 'Benefit', 0.30),
 (33, 19, 'k19-5', 'Benefit', 0.30),
-(34, 12, 'qq', 'Benefit', 0.10);
+(34, 12, 'qq', 'Benefit', 0.10),
+(35, 20, 'a3', 'Benefit', 0.10),
+(36, 20, 'b3', 'Benefit', 0.20),
+(37, 20, 'c3', 'Benefit', 0.30),
+(38, 20, 'd3', 'Benefit', 0.30),
+(41, 20, 'e3', 'Benefit', 0.10);
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,8 @@ CREATE TABLE `tbl_periode` (
 INSERT INTO `tbl_periode` (`id_periode`, `keterangan`) VALUES
 (12, 'Periode I (Januari - Juni) 2024'),
 (19, 'Periode II (Juli-Desember) 2024'),
-(20, 'Periode III');
+(21, 'Periode I (Januari - Juni) 2025'),
+(22, 'Periode I (Januari - Juni) 2021');
 
 -- --------------------------------------------------------
 
@@ -357,7 +363,7 @@ ALTER TABLE `tbl_hasil`
 -- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tbl_penilaian`
@@ -369,7 +375,7 @@ ALTER TABLE `tbl_penilaian`
 -- AUTO_INCREMENT for table `tbl_periode`
 --
 ALTER TABLE `tbl_periode`
-  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_subkriteria`

@@ -20,7 +20,7 @@ $idp = $_GET['idp'];
 						<tr style="background-color: #529dff; color: #ffff" align="center">
 							<!-- Tampil Data Kriteria -->
 							<?php
-							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
 							while ($rowtr = $sqltr->fetch_array()) {
 							?>
 								<th><?= $rowtr['nama_kriteria']; ?></th>
@@ -33,7 +33,7 @@ $idp = $_GET['idp'];
 						<tr align="center" style="color: #355E3B">
 							<!-- Tampil data Jenis Kriteria -->
 							<?php
-							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
 							while ($rowtr = $sqltr->fetch_array()) {
 							?>
 								<th><?= $rowtr['jenis_kriteria']; ?></th>
@@ -49,7 +49,7 @@ $idp = $_GET['idp'];
 						<tr align="center" style="color: #355E3B">
 							<!-- Tampil Data Nilai Bobot -->
 							<?php
-							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria");
+							$sqltr = mysqli_query($konek, "SELECT * FROM tbl_kriteria WHERE id_periode = $idp");
 							while ($rowtr = $sqltr->fetch_array()) {
 							?>
 								<td><?= $rowtr['bobot']; ?></td>

@@ -13,7 +13,7 @@ include("style/sidebarawal.php");
         <?php
         include("../config/koneksi.php");
         if (isset($_POST['tambah'])) {
-          $keterangan = $_POST['keterangan'];
+          $keterangan = $_POST['periode'] . ' ' . $_POST['tahun'];
 
 
           // Validasi 1: Menangani jika ada nama keterangan dan tanggal periode yang sama
@@ -120,7 +120,7 @@ include("style/sidebarawal.php");
             <?php
             include("../config/koneksi.php");
             $no = 1;
-            $sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY id_periode ASC");
+            $sql = mysqli_query($konek, "SELECT * FROM tbl_periode ORDER BY RIGHT(keterangan, 4) DESC");
             while ($array = mysqli_fetch_assoc($sql)) {
             ?>
               <tbody>
@@ -166,8 +166,24 @@ include("style/sidebarawal.php");
       <div class="modal-body">
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="form-group">
-            <label>Keterangan</label>
-            <input type="text" class="form-control mb-2" name="keterangan" placeholder="Keterangan..." required="" autocomplete="off">
+            <label>Periode</label>
+            <div class="form-control ms-2" style="border: none;">
+              <div class="row">
+                <select name="periode" class="form-control col-md-6 mb-2" id="" required>
+                  <option value="" selected disabled>Periode</option>
+                  <option value="Periode I (Januari - Juni)">Periode I (Januari - Juni)</option>
+                  <option value="Periode II (Juli-Desember)">Periode II (Juli - Desember)</option>
+                </select>
+                <select name="tahun" class="form-control col-md-5 mb-2" style="margin-left: 10px;" id="" required>
+                  <option value="" selected disabled>Tahun</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
+            </div>
           </div>
       </div>
       <div class="modal-footer">

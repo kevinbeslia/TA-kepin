@@ -172,7 +172,7 @@ include("style/sidebarawal.php");
                 <select name="periode" class="form-control col-md-6 mb-2" id="" required>
                   <option value="" selected disabled>Periode</option>
                   <option value="Periode I (Januari - Juni)">Periode I (Januari - Juni)</option>
-                  <option value="Periode II (Juli-Desember)">Periode II (Juli - Desember)</option>
+                  <option value="Periode II (Juli - Desember)">Periode II (Juli - Desember)</option>
                 </select>
                 <select name="tahun" class="form-control col-md-5 mb-2" style="margin-left: 10px;" id="" required>
                   <option value="" selected disabled>Tahun</option>
